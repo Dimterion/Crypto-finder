@@ -8,6 +8,7 @@ const COINGECKO_URL = process.env.REACT_APP_COINGECKO_URL;
 export const GitHubProvider = ({ children }) => {
   const initialState = {
     users: [],
+    user: {},
     loading: false,
   };
 
@@ -37,9 +38,9 @@ export const GitHubProvider = ({ children }) => {
       query: text,
     });
 
-    const response = await fetch(
-      `${COINGECKO_URL}/search?${params}`
-    );
+    const response = await fetch(`${COINGECKO_URL}/search?${params}`, {
+      headers: {},
+    });
 
     const { coins } = await response.json();
 
@@ -47,6 +48,26 @@ export const GitHubProvider = ({ children }) => {
       type: "GET_USERS",
       payload: coins,
     });
+  };
+
+  // Get single user
+  const getUser = async (api_symbol) => {
+    setLoading();
+
+    const response = await fetch(`${COINGECKO_URL}/coins/${api_symbol}`, {
+      headers: {},
+    });
+
+    if (response.status === 404) {
+      window.location = "/notfound";
+    } else {
+      const data = await response.json();
+
+      dispatch({
+        type: "GET_USER",
+        payload: data,
+      });
+    }
   };
 
   // Clear search results
@@ -60,8 +81,10 @@ export const GitHubProvider = ({ children }) => {
       value={{
         users: state.users,
         loading: state.loading,
+        user: state.user,
         searchUsers,
         clearUsers,
+        getUser,
       }}
     >
       {children}
