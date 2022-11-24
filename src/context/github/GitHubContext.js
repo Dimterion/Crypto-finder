@@ -3,7 +3,7 @@ import gitHubReducer from "./GitHubReducer";
 
 const GitHubContext = createContext();
 
-const GITHUB_URL = process.env.REACT_APP_GITHUB_URL;
+const COINGECKO_URL = process.env.REACT_APP_COINGECKO_URL;
 
 export const GitHubProvider = ({ children }) => {
   const initialState = {
@@ -14,38 +14,38 @@ export const GitHubProvider = ({ children }) => {
   const [state, dispatch] = useReducer(gitHubReducer, initialState);
 
   // Get initial users (testing purposes)
-  const fetchUsers = async () => {
-    setLoading();
+  // const fetchUsers = async () => {
+  //   setLoading();
 
-    const response = await fetch(`${GITHUB_URL}/films`, {
-      headers: {},
-    });
+  //   const response = await fetch(`${GITHUB_URL}/films`, {
+  //     headers: {},
+  //   });
 
-    const data = await response.json();
+  //   const data = await response.json();
 
-    dispatch({
-      type: "GET_USERS",
-      payload: data,
-    });
-  };
+  //   dispatch({
+  //     type: "GET_USERS",
+  //     payload: data,
+  //   });
+  // };
 
   // Get search results
   const searchUsers = async (text) => {
     setLoading();
 
     const params = new URLSearchParams({
-      q: text,
+      query: text,
     });
 
-    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
-      headers: {},
-    });
+    const response = await fetch(
+      `${COINGECKO_URL}/search?${params}`
+    );
 
-    const { items } = await response.json();
+    const { coins } = await response.json();
 
     dispatch({
       type: "GET_USERS",
-      payload: items,
+      payload: coins,
     });
   };
 
@@ -60,7 +60,6 @@ export const GitHubProvider = ({ children }) => {
       value={{
         users: state.users,
         loading: state.loading,
-        fetchUsers,
         searchUsers,
         clearUsers,
       }}
