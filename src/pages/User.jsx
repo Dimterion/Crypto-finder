@@ -13,15 +13,18 @@ function User() {
     getUser(params.api_symbol);
   }, []);
 
-  //const { name } = user;
+  const { name, symbol, links, image, market_data } = user;
 
   // Checking if the property exists in the JSON object
-
-  function getNestedObject(obj, key) {
-    return key.split(".").reduce(function (o, x) {
-      return typeof o == "undefined" || o === null ? o : o[x];
-    }, obj);
+  function getNestedObject(object, key) {
+    return key.split(".").reduce(function (property, index) {
+      return typeof property == "undefined" || property === null
+        ? property
+        : property[index];
+    }, object);
   }
+
+  const homePageLink = getNestedObject(links, "homepage");
 
   // Example of the above function check:
   //   {user &&
@@ -31,7 +34,7 @@ function User() {
   //   user.market_data.current_price.usd}
 
   if (loading) {
-    return <h3>Loading...</h3>;
+    return <h2>Loading...</h2>;
   }
 
   return (
@@ -45,8 +48,31 @@ function User() {
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 mb-8 md:gap-8">
           <div className="custom-card-image mb-6 md:mb-0">
             <div className="rounded-lg shadow-xl card image-full">
-              <div>
-                {getNestedObject(user, "market_data.current_price.eur")}
+              <figure>
+                <img
+                  src={getNestedObject(image, "large")}
+                  alt="Currency logo"
+                />
+              </figure>
+            </div>
+          </div>
+          <div className="col-span-2">
+            <div className="mb-6">
+              <h2 className="text-3xl card-title">
+                {name}
+                <div className="ml-2 mr-1 badge badge-success">{symbol}</div>
+              </h2>
+              <p>{getNestedObject(market_data, "current_price.usd")} USD</p>
+              <p>{getNestedObject(market_data, "current_price.eur")} EUR</p>
+              <div className="mt-4 card-actions">
+                <a
+                  href={homePageLink && homePageLink[0]}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="btn btn-outline"
+                >
+                  Visit Currency Home Page
+                </a>
               </div>
             </div>
           </div>
