@@ -1,21 +1,21 @@
-const gitHubReducer = (state, action) => {
+const currencyReducer = (state, action) => {
   switch (action.type) {
-    case "GET_USERS":
+    case "GET_CURRENCIES":
       return {
         ...state,
-        users: action.payload,
+        currencies: action.payload,
         loading: false,
       };
-    case "GET_USER":
+    case "GET_CURRENCY":
       return {
         ...state,
-        user: action.payload,
+        currency: action.payload,
         loading: false,
       };
-    case "CLEAR_USERS":
+    case "CLEAR_CURRENCIES":
       return {
         ...state,
-        users: [],
+        currencies: [],
       };
     case "SET_LOADING":
       return {
@@ -27,4 +27,4 @@ const gitHubReducer = (state, action) => {
   }
 };
 
-export default gitHubReducer;
+export default currencyReducer;

@@ -2,15 +2,15 @@ import { FaRegCalendarCheck, FaChartBar, FaThinkPeaks } from "react-icons/fa";
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-import GitHubContext from "../context/github/GitHubContext";
+import CurrencyContext from "../context/currency/CurrencyContext";
 
-function User() {
-  const { getUser, user, loading } = useContext(GitHubContext);
+function Currency() {
+  const { getCurrency, currency, loading } = useContext(CurrencyContext);
 
   const params = useParams();
 
   useEffect(() => {
-    getUser(params.api_symbol);
+    getCurrency(params.api_symbol);
   }, []);
 
   const {
@@ -23,7 +23,7 @@ function User() {
     market_cap_rank,
     liquidity_score,
     market_data,
-  } = user;
+  } = currency;
 
   // Checking if the property exists in the JSON object
   function getNestedObject(object, key) {
@@ -35,11 +35,11 @@ function User() {
   }
 
   // Example of the above function check:
-  //   {user &&
-  //   user.market_data &&
-  //   user.market_data.current_price &&
-  //   user.market_data.current_price.usd &&
-  //   user.market_data.current_price.usd}
+  //   {currency &&
+  //   currency.market_data &&
+  //   currency.market_data.current_price &&
+  //   currency.market_data.current_price.usd &&
+  //   currency.market_data.current_price.usd}
 
   if (loading) {
     return <h2>Loading...</h2>;
@@ -86,6 +86,7 @@ function User() {
               </div>
               <div>
                 {description &&
+                  description.en !== "" &&
                   getNestedObject(description, "en")
                     .match(/[^.!?]+[.!?]+/g)
                     .slice(0, 5)}
@@ -136,4 +137,4 @@ function User() {
   );
 }
 
-export default User;
+export default Currency;

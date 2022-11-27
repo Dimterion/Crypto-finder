@@ -1,37 +1,37 @@
 import { createContext, useReducer } from "react";
-import gitHubReducer from "./GitHubReducer";
+import currencyReducer from "./CurrencyReducer";
 
-const GitHubContext = createContext();
+const CurrencyContext = createContext();
 
 const COINGECKO_URL = process.env.REACT_APP_COINGECKO_URL;
 
-export const GitHubProvider = ({ children }) => {
+export const CurrencyProvider = ({ children }) => {
   const initialState = {
-    users: [],
-    user: {},
+    currencies: [],
+    currency: {},
     loading: false,
   };
 
-  const [state, dispatch] = useReducer(gitHubReducer, initialState);
+  const [state, dispatch] = useReducer(currencyReducer, initialState);
 
-  // Get initial users (testing purposes)
-  // const fetchUsers = async () => {
+  // Get initial currencies (testing purposes)
+  // const fetchCurrencies = async () => {
   //   setLoading();
 
-  //   const response = await fetch(`${GITHUB_URL}/films`, {
+  //   const response = await fetch(`${CURRENCY_URL}/films`, {
   //     headers: {},
   //   });
 
   //   const data = await response.json();
 
   //   dispatch({
-  //     type: "GET_USERS",
+  //     type: "GET_CURRENCIES",
   //     payload: data,
   //   });
   // };
 
   // Get search results
-  const searchUsers = async (text) => {
+  const searchCurrencies = async (text) => {
     setLoading();
 
     const params = new URLSearchParams({
@@ -45,13 +45,13 @@ export const GitHubProvider = ({ children }) => {
     const { coins } = await response.json();
 
     dispatch({
-      type: "GET_USERS",
+      type: "GET_CURRENCIES",
       payload: coins,
     });
   };
 
-  // Get single user
-  const getUser = async (api_symbol) => {
+  // Get single currency
+  const getCurrency = async (api_symbol) => {
     setLoading();
 
     const response = await fetch(`${COINGECKO_URL}/coins/${api_symbol}`, {
@@ -64,32 +64,32 @@ export const GitHubProvider = ({ children }) => {
       const data = await response.json();
 
       dispatch({
-        type: "GET_USER",
+        type: "GET_CURRENCY",
         payload: data,
       });
     }
   };
 
   // Clear search results
-  const clearUsers = () => dispatch({ type: "CLEAR_USERS" });
+  const clearCurrencies = () => dispatch({ type: "CLEAR_CURRENCIES" });
 
   // Set loading
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
   return (
-    <GitHubContext.Provider
+    <CurrencyContext.Provider
       value={{
-        users: state.users,
+        currencies: state.currencies,
         loading: state.loading,
-        user: state.user,
-        searchUsers,
-        clearUsers,
-        getUser,
+        currency: state.currency,
+        searchCurrencies,
+        clearCurrencies,
+        getCurrency,
       }}
     >
       {children}
-    </GitHubContext.Provider>
+    </CurrencyContext.Provider>
   );
 };
 
-export default GitHubContext;
+export default CurrencyContext;

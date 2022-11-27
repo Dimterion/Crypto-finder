@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Adjustment of the opacity of the card with an image */
 .custom-card-image .card.image-full:before {
   opacity: 0.1;
 }

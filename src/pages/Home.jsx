@@ -1,11 +1,11 @@
-import UserResults from "../components/users/UserResults";
-import UserSearch from "../components/users/UserSearch";
+import CurrencyResults from "../components/currencies/CurrencyResults";
+import CurrencySearch from "../components/currencies/CurrencySearch";
 
 function Home() {
   return (
     <>
-      <UserSearch />
-      <UserResults />
+      <CurrencySearch />
+      <CurrencyResults />
     </>
   );
 }
