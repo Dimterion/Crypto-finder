@@ -49,8 +49,8 @@ function Currency() {
     <>
       <div className="w-full mx-auto lg:w-10/12">
         <div className="mb-4">
-          <Link to="/" className="btn btn-ghost">
-            Back to Search
+          <Link to="/" className="btn btn-ghost btn-outline">
+            Back to Search page
           </Link>
         </div>
         <div className="grid grid-cols-1 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-3 md:gap-8">
@@ -98,7 +98,7 @@ function Currency() {
                   rel="noreferrer"
                   className="btn btn-outline"
                 >
-                  Visit Currency Home Page
+                  Currency Home Page
                 </a>
               </div>
             </div>

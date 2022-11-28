@@ -15,7 +15,7 @@ function CurrencySearch() {
     e.preventDefault();
 
     if (text === "") {
-      setAlert("Please enter something", "error");
+      setAlert("Please enter currency name", "error");
     } else {
       searchCurrencies(text);
       setText("");
@@ -48,7 +48,7 @@ function CurrencySearch() {
       {currencies.length > 0 && (
         <div>
           <button onClick={clearCurrencies} className="btn btn-ghost btn-lg">
-            Clear
+            Clear results
           </button>
         </div>
       )}

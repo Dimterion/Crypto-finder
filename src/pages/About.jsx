@@ -6,7 +6,7 @@ function About() {
         A React app to search for Crypto Currencies and get main information
         about them.
         <p className="text-lg text-gray-400">
-          Version <span className="text-white">1.5</span>
+          Version <span className="text-white">1.5.5</span>
         </p>
       </div>
     </>

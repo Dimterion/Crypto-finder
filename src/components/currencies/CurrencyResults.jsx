@@ -21,7 +21,7 @@ function CurrencyResults() {
       </div>
     );
   } else {
-    return <h3>Loading...</h3>;
+    return <h2>Loading...</h2>;
   }
 }
 

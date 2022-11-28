@@ -10,7 +10,7 @@ function NotFound() {
           <p className="text-5xl mb-8">Page not found!</p>
           <Link to="/" className="btn btn-primary btn-lg">
             <FaHome className="mr-2" />
-            Back to Home
+            Back to Home Page
           </Link>
         </div>
       </div>

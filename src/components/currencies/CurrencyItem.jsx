@@ -18,7 +18,7 @@ function CurrencyItem({ currency: { name, api_symbol, large } }) {
             className="text-base-content text-opacity-40"
             to={`/currency/${api_symbol}`}
           >
-            Visit Profile
+            More information
           </Link>
         </div>
       </div>
