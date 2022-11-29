@@ -9,6 +9,7 @@ export const CurrencyProvider = ({ children }) => {
   const initialState = {
     currencies: [],
     currency: {},
+    tickers: [],
     loading: false,
   };
 
@@ -70,6 +71,25 @@ export const CurrencyProvider = ({ children }) => {
     }
   };
 
+  // Get currency tickers
+  const getCurrencyTickers = async (api_symbol) => {
+    setLoading();
+
+    const response = await fetch(
+      `${COINGECKO_URL}/coins/${api_symbol}/tickers`,
+      {
+        headers: {},
+      }
+    );
+
+    const { tickers } = await response.json();
+
+    dispatch({
+      type: "GET_TICKERS",
+      payload: tickers,
+    });
+  };
+
   // Clear search results
   const clearCurrencies = () => dispatch({ type: "CLEAR_CURRENCIES" });
 
@@ -82,9 +102,11 @@ export const CurrencyProvider = ({ children }) => {
         currencies: state.currencies,
         loading: state.loading,
         currency: state.currency,
+        tickers: state.tickers,
         searchCurrencies,
         clearCurrencies,
         getCurrency,
+        getCurrencyTickers,
       }}
     >
       {children}

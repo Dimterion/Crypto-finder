@@ -2,15 +2,18 @@ import { FaRegCalendarCheck, FaChartBar, FaThinkPeaks } from "react-icons/fa";
 import { useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import TickersList from "../components/tickers/TickersList";
 import CurrencyContext from "../context/currency/CurrencyContext";
 
 function Currency() {
-  const { getCurrency, currency, loading } = useContext(CurrencyContext);
+  const { getCurrency, currency, loading, getCurrencyTickers, tickers } =
+    useContext(CurrencyContext);
 
   const params = useParams();
 
   useEffect(() => {
     getCurrency(params.api_symbol);
+    getCurrencyTickers(params.api_symbol);
   }, []);
 
   const {
@@ -87,6 +90,7 @@ function Currency() {
               <div>
                 {description &&
                   description.en !== "" &&
+                  description.en !== "\r\n" &&
                   getNestedObject(description, "en")
                     .match(/[^.!?]+[.!?]+/g)
                     .slice(0, 5)}
@@ -132,6 +136,7 @@ function Currency() {
             <div className="stat-value text-lg">{liquidity_score}</div>
           </div>
         </div>
+        <TickersList tickers={tickers} />
       </div>
     </>
   );

@@ -17,6 +17,12 @@ const currencyReducer = (state, action) => {
         ...state,
         currencies: [],
       };
+    case "GET_TICKERS":
+      return {
+        ...state,
+        tickers: action.payload,
+        loading: false,
+      };
     case "SET_LOADING":
       return {
         ...state,
