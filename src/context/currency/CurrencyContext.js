@@ -84,10 +84,17 @@ export const CurrencyProvider = ({ children }) => {
 
     const { tickers } = await response.json();
 
-    dispatch({
-      type: "GET_TICKERS",
-      payload: tickers,
-    });
+    if (tickers.length > 5) {
+      dispatch({
+        type: "GET_TICKERS",
+        payload: tickers.slice(0, 5),
+      });
+    } else {
+      dispatch({
+        type: "GET_TICKERS",
+        payload: tickers,
+      });
+    }
   };
 
   // Clear search results

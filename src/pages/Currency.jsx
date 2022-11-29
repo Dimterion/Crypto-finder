@@ -71,7 +71,9 @@ function Currency() {
             <div className="mb-6">
               <h2 className="text-3xl card-title">
                 {name}
-                <div className="ml-2 mr-1 badge badge-success">{symbol}</div>
+                <div className="ml-2 mr-1 py-4 text-center badge badge-success">
+                  {symbol}
+                </div>
               </h2>
               <div className="w-full rounded-lg shadow-md bg-base-100 stats mt-5 mb-5">
                 <div className="stat p-4">
@@ -115,7 +117,9 @@ function Currency() {
               <FaRegCalendarCheck className="text-2xl" />
             </div>
             <div className="stat-title pr-3">Origin date</div>
-            <div className="stat-value text-lg">{genesis_date}</div>
+            <div className="stat-value text-lg">
+              {genesis_date ? genesis_date : "N/A"}
+            </div>
           </div>
         </div>
         <div className="w-full xl:w-1/4 md:w-56 mb-6 mr-3 rounded-lg shadow-md bg-base-100 stats">
