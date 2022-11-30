@@ -31,26 +31,6 @@ export const CurrencyProvider = ({ children }) => {
   //   });
   // };
 
-  // Get search results
-  const searchCurrencies = async (text) => {
-    setLoading();
-
-    const params = new URLSearchParams({
-      query: text,
-    });
-
-    const response = await fetch(`${COINGECKO_URL}/search?${params}`, {
-      headers: {},
-    });
-
-    const { coins } = await response.json();
-
-    dispatch({
-      type: "GET_CURRENCIES",
-      payload: coins,
-    });
-  };
-
   // Get single currency
   const getCurrency = async (api_symbol) => {
     setLoading();
@@ -106,11 +86,12 @@ export const CurrencyProvider = ({ children }) => {
   return (
     <CurrencyContext.Provider
       value={{
-        currencies: state.currencies,
-        loading: state.loading,
-        currency: state.currency,
-        tickers: state.tickers,
-        searchCurrencies,
+        // currencies: state.currencies,
+        // loading: state.loading,
+        // currency: state.currency,
+        // tickers: state.tickers,
+        ...state,
+        dispatch,
         clearCurrencies,
         getCurrency,
         getCurrencyTickers,

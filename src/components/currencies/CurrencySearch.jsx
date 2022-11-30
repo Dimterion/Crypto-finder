@@ -1,23 +1,25 @@
 import { useState, useContext } from "react";
 import CurrencyContext from "../../context/currency/CurrencyContext";
 import AlertContext from "../../context/alert/AlertContext";
+import { searchCurrencies } from "../../context/currency/CurrencyActions";
 
 function CurrencySearch() {
   const [text, setText] = useState("");
 
-  const { currencies, searchCurrencies, clearCurrencies } =
-    useContext(CurrencyContext);
+  const { currencies, dispatch, clearCurrencies } = useContext(CurrencyContext);
   const { setAlert } = useContext(AlertContext);
 
   const handleChange = (e) => setText(e.target.value);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (text === "") {
       setAlert("Please enter currency name", "error");
     } else {
-      searchCurrencies(text);
+      dispatch({ type: "SET_LOADING" });
+      const currencies = await searchCurrencies(text);
+      dispatch({ type: "GET_CURRENCIES", payload: currencies });
       setText("");
     }
   };
