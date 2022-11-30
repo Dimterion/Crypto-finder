@@ -14,6 +14,7 @@ function Currency() {
   useEffect(() => {
     getCurrency(params.api_symbol);
     getCurrencyTickers(params.api_symbol);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const {
@@ -128,7 +129,9 @@ function Currency() {
               <FaChartBar className="text-2xl" />
             </div>
             <div className="stat-title pr-3">Market Cap Rank</div>
-            <div className="stat-value text-lg">{market_cap_rank}</div>
+            <div className="stat-value text-lg">
+              {market_cap_rank ? market_cap_rank : "N/A"}
+            </div>
           </div>
         </div>
         <div className="w-full xl:w-1/4 md:w-56 mb-6 mr-3 rounded-lg shadow-md bg-base-100 stats">
@@ -137,7 +140,9 @@ function Currency() {
               <FaThinkPeaks className="text-2xl" />
             </div>
             <div className="stat-title pr-3">Liquidity Score</div>
-            <div className="stat-value text-lg">{liquidity_score}</div>
+            <div className="stat-value text-lg">
+              {liquidity_score ? liquidity_score : "N/A"}
+            </div>
           </div>
         </div>
         <TickersList tickers={tickers} />
