@@ -4,10 +4,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import TickersList from "../components/tickers/TickersList";
 import CurrencyContext from "../context/currency/CurrencyContext";
-import {
-  getCurrency,
-  getCurrencyTickers,
-} from "../context/currency/CurrencyActions";
+import { getCurrencyAndTickers } from "../context/currency/CurrencyActions";
 
 function Currency() {
   const { currency, loading, tickers, dispatch } = useContext(CurrencyContext);
@@ -17,11 +14,8 @@ function Currency() {
   useEffect(() => {
     dispatch({ type: "SET_LOADING" });
     const getCurrencyData = async () => {
-      const currencyData = await getCurrency(params.api_symbol);
-      dispatch({ type: "GET_CURRENCY", payload: currencyData });
-
-      const currencyTickersData = await getCurrencyTickers(params.api_symbol);
-      dispatch({ type: "GET_TICKERS", payload: currencyTickersData });
+      const currencyData = await getCurrencyAndTickers(params.api_symbol);
+      dispatch({ type: "GET_CURRENCY_AND_TICKERS", payload: currencyData });
     };
 
     getCurrencyData();
@@ -74,6 +68,7 @@ function Currency() {
                 <img
                   src={getNestedObject(image, "large")}
                   alt="Currency logo"
+                  className="p-4"
                 />
               </figure>
             </div>
@@ -90,13 +85,29 @@ function Currency() {
                 <div className="stat p-4">
                   <div className="stat-title text-md">Price in USD</div>
                   <div className="text-lg stat-value">
-                    {getNestedObject(market_data, "current_price.usd")}$
+                    {market_data &&
+                      market_data.current_price.usd &&
+                      (getNestedObject(market_data, "current_price.usd") > 0.01
+                        ? getNestedObject(market_data, "current_price.usd")
+                        : getNestedObject(
+                            market_data,
+                            "current_price.usd"
+                          ).toFixed(6))}
+                    $
                   </div>
                 </div>
                 <div className="stat p-4">
                   <div className="stat-title text-md">Price in EUR</div>
                   <div className="text-lg stat-value">
-                    {getNestedObject(market_data, "current_price.eur")}€
+                    {market_data &&
+                      market_data.current_price.eur &&
+                      (getNestedObject(market_data, "current_price.eur") > 0.01
+                        ? getNestedObject(market_data, "current_price.eur")
+                        : getNestedObject(
+                            market_data,
+                            "current_price.eur"
+                          ).toFixed(6))}
+                    €
                   </div>
                 </div>
               </div>
