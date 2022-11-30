@@ -4,18 +4,28 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import TickersList from "../components/tickers/TickersList";
 import CurrencyContext from "../context/currency/CurrencyContext";
+import {
+  getCurrency,
+  getCurrencyTickers,
+} from "../context/currency/CurrencyActions";
 
 function Currency() {
-  const { getCurrency, currency, loading, getCurrencyTickers, tickers } =
-    useContext(CurrencyContext);
+  const { currency, loading, tickers, dispatch } = useContext(CurrencyContext);
 
   const params = useParams();
 
   useEffect(() => {
-    getCurrency(params.api_symbol);
-    getCurrencyTickers(params.api_symbol);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    dispatch({ type: "SET_LOADING" });
+    const getCurrencyData = async () => {
+      const currencyData = await getCurrency(params.api_symbol);
+      dispatch({ type: "GET_CURRENCY", payload: currencyData });
+
+      const currencyTickersData = await getCurrencyTickers(params.api_symbol);
+      dispatch({ type: "GET_TICKERS", payload: currencyTickersData });
+    };
+
+    getCurrencyData();
+  }, [dispatch, params.api_symbol]);
 
   const {
     name,

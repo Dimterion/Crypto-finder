@@ -6,7 +6,7 @@ import { searchCurrencies } from "../../context/currency/CurrencyActions";
 function CurrencySearch() {
   const [text, setText] = useState("");
 
-  const { currencies, dispatch, clearCurrencies } = useContext(CurrencyContext);
+  const { currencies, dispatch } = useContext(CurrencyContext);
   const { setAlert } = useContext(AlertContext);
 
   const handleChange = (e) => setText(e.target.value);
@@ -49,7 +49,10 @@ function CurrencySearch() {
       </div>
       {currencies.length > 0 && (
         <div>
-          <button onClick={clearCurrencies} className="btn btn-ghost btn-lg">
+          <button
+            onClick={() => dispatch({ type: "CLEAR_CURRENCIES" })}
+            className="btn btn-ghost btn-lg"
+          >
             Clear results
           </button>
         </div>
