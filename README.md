@@ -8,7 +8,7 @@ This is an application to search for and get information about crypto currencies
 
 ## Description
 
-This application was built after remaking one of the previous projects from the React course on Udemy. Initial version is available [here](https://github.com/Dimterion/Github-finder) and its repository is [here](https://github.com/Dimterion/Github-finder).
+This application was built after remaking one of the previous projects from the React course on Udemy. Initial version is available [here](https://github-finder-chi-ten.vercel.app/) and its repository is [here](https://github.com/Dimterion/Github-finder).
 
 ## Built with
 
