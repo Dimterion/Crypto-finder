@@ -4,7 +4,7 @@ This is an application to search for and get information about crypto currencies
 
 ## Live version
 
-[Crypto finder](https://finder-app-tau.vercel.app/)
+[Crypto Finder](https://finder-app-tau.vercel.app/)
 
 ## Details
 
