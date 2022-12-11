@@ -1,8 +1,8 @@
-# Crypto currencies finder application
+# Crypto Finder
 
-This is an application to search for and get information about crypto currencies
+An application to search for and get information about crypto currencies.
 
-## Live version
+## Live Version
 
 [Crypto Finder](https://finder-app-tau.vercel.app/)
 
