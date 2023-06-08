@@ -8,9 +8,9 @@ An application to search for and get information about crypto currencies.
 
 ## Details
 
-This application was built after remaking one of the previous projects from the React course on Udemy. Initial version is available [here](https://github-finder-chi-ten.vercel.app/) and its repository is [here](https://github.com/Dimterion/Github-finder).
+This application was built after remaking one of the previous projects. Initial version is available [here](https://github-finder-chi-ten.vercel.app/) and its repository is [here](https://github.com/Dimterion/Github-finder).
 
-The app allows to type the name of the crypto currency, get a list of all possible ones matching it and see general information about each one (price, overview, markets data, etc).
+The app allows to search for a crypto currency by its name, get a list of all possible ones matching it and see general information about each one (price, overview, markets data, etc).
 
 Overall, in comparison to the initial version, I've used the CoinGecko API, adjusted the responsiveness for the mobile version and added some styling changes for the individual currencies pages.
 
